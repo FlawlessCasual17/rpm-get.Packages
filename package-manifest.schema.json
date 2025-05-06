@@ -1,86 +1,37 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "Package Configuration",
-  "description": "Schema for package configuration file",
+  "title": "Package Manifest Schema",
+  "description": "Schema for package manifest file",
   "type": "object",
   "required": [
+    "version",
     "name",
     "description",
-    "version",
     "homepage",
-    "url",
-    "hash",
     "notes",
+    "arch",
     "auto_update"
   ],
   "properties": {
-    "name": {
-      "type": "string",
-      "description": "Package name"
-    },
-    "description": {
-      "type": "string",
-      "description": "Package description"
-    },
     "version": {
       "type": "string",
       "description": "Package version"
+    },
+    "name": {
+      "type": "string",
+      "description": "Package name"
     },
     "homepage": {
       "type": "string",
       "description": "Package homepage"
     },
-    "url": {
+    "description": {
       "type": "string",
-      "description": "Package download URL"
-    },
-    "hash": {
-      "type": "string",
-      "description": "Package download hash"
+      "description": "Package description"
     },
     "notes": {
       "type": "string",
       "description": "Additional notes about the package"
-    },
-    "repo": {
-      "type": "object",
-      "description": "Information about an RPM repository (Will eventually support Zypper repos)",
-      "properties": {
-        "url": {
-          "type": "string",
-          "description": "Package repository URL"
-        },
-        "requires_gpg": {
-          "type": "boolean",
-          "description": "Used to indicate that a package requires a GPG key to be installed",
-          "default": false
-        },
-        "gpg_key_url": {
-          "type": "string",
-          "description": "Repository GPG key URL"
-        }
-      },
-      "required": ["url"]
-    },
-    "requires_copr": {
-      "type": "boolean",
-      "description": "Used to indicate that a package is only available in Fedora COPR",
-      "default": false
-    },
-    "copr_repo": {
-      "type": "object",
-      "description": "Information about a Fedora COPR repository",
-      "properties": {
-        "user": {
-          "type": "string",
-          "description": "Copr user name"
-        },
-        "project": {
-          "type": "string",
-          "description": "Copr project name"
-        }
-      },
-      "required": ["user", "project"]
     },
     "arch": {
       "type": "object",
@@ -147,6 +98,120 @@
           "required": ["url", "hash"]
         }
       }
+    },
+    "repo": {
+      "type": "object",
+      "description": "Information about an RPM repository (Will eventually support Zypper repos)",
+      "properties": {
+        "url": {
+          "type": "string",
+          "description": "Package repository URL"
+        },
+        "gpg_key_url": {
+          "type": "string",
+          "description": "Repository GPG key URL"
+        }
+      },
+      "required": ["url"]
+    },
+    "github": {
+      "anyOf": [
+        {
+          "type": "string",
+          "description": "Information about a GitHub repository. This must be in the format 'username/repository-name'",
+          "pattern": "^[a-zA-Z0-9_-]+/[a-zA-Z0-9_-]+$"
+        },
+        {
+          "type": "object",
+          "description": "Information about a GitHub repository",
+          "properties": {
+            "owner": {
+              "type": "string",
+              "description": "Can either be a GitHub username or organization name"
+            },
+            "repo": {
+              "type": "string",
+              "description": "GitHub repository name"
+            }
+          },
+          "required": ["creator", "repo"]
+        }
+      ]
+    },
+    "gitlab": {
+      "anyOf": [
+        {
+          "type": "string",
+          "description": "Information about a GitLab repository. This must be in the format 'group/sub-group/project'",
+          "pattern": "^[a-zA-Z0-9_-]+/[a-zA-Z0-9_-]+/[a-zA-Z0-9_-]+$"
+        },
+        {
+          "type": "string",
+          "description": "Information about a GitLab repository. This must be in the format 'owner/project'",
+          "pattern": "^[a-zA-Z0-9_-]+/[a-zA-Z0-9_-]+$"
+        },
+        {
+          "type": "object",
+          "description": "Information about a GitLab repository",
+          "properties": {
+            "group": {
+              "type": "string",
+              "description": "GitLab group name"
+            },
+            "sub_group": {
+              "type": "string",
+              "description": "GitLab sub-group name"
+            },
+            "project": {
+              "type": "string",
+              "description": "GitLab project name"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "description": "Information about a GitLab repository",
+          "properties": {
+            "group": {
+              "type": "string",
+              "description": "GitLab group name"
+            },
+            "project": {
+              "type": "string",
+              "description": "GitLab project name"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "description": "Information about a GitLab repository",
+          "properties": {
+            "profile": {
+              "type": "string",
+              "description": "GitLab profile name"
+            },
+            "project": {
+              "type": "string",
+              "description": "GitLab project name"
+            }
+          }
+        }
+      ]
+    },
+    "copr": {
+      "type": "object",
+      "description": "Information about a Fedora COPR repository",
+      "properties": {
+        "user": {
+          "type": "string",
+          "description": "Copr user name"
+        },
+        "project": {
+          "type": "string",
+          "description": "Copr project name"
+        }
+      },
+      "required": ["user", "project"]
     },
     "depends": {
       "type": "array",
