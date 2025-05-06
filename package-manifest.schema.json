@@ -200,7 +200,7 @@
           "type": "object",
           "description": "Information about an RPM/COPR repository (Will eventually support Zypper repos)",
           "properties": {
-            "user": {
+            "username": {
               "type": "string",
               "description": "Copr user name"
             },
