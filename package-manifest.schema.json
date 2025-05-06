@@ -7,6 +7,7 @@
     "supported_os",
     "version",
     "name",
+    "license",
     "description",
     "homepage",
     "notes",
@@ -27,6 +28,72 @@
     "name": {
       "type": "string",
       "description": "Package name"
+    },
+    "license": {
+      "anyOf": [
+        {
+          "type": "string",
+          "description": "Package license based on SPDX license format, and license list: https://spdx.org/licenses/",
+          "examples": [
+            "Apache-2.0",
+            "BSD-3-Clause",
+            "Freeware",
+            "GPL-2.0-only",
+            "GPL-2.0-or-later",
+            "GPL-3.0-only",
+            "GPL-3.0-or-later",
+            "ISC",
+            "LGPL-2.0-only",
+            "LGPL-2.0-or-later",
+            "LGPL-2.1-only",
+            "LGPL-2.1-or-later",
+            "LGPL-3.0-only",
+            "LGPL-3.0-or-later",
+            "MIT",
+            "MS-PL",
+            "Proprietary",
+            "Public Domain",
+            "Shareware",
+            "Unlicense"
+          ]
+        },
+        {
+          "type": "object",
+          "description": "Package license based on SPDX license format, and license list: https://spdx.org/licenses/",
+          "properties": {
+            "identifier": {
+              "type": "string",
+              "description": "License identifier",
+              "examples": [
+                "Apache-2.0",
+                "BSD-3-Clause",
+                "Freeware",
+                "GPL-2.0-only",
+                "GPL-2.0-or-later",
+                "GPL-3.0-only",
+                "GPL-3.0-or-later",
+                "ISC",
+                "LGPL-2.0-only",
+                "LGPL-2.0-or-later",
+                "LGPL-2.1-only",
+                "LGPL-2.1-or-later",
+                "LGPL-3.0-only",
+                "LGPL-3.0-or-later",
+                "MIT",
+                "MS-PL",
+                "Proprietary",
+                "Public Domain",
+                "Shareware",
+                "Unlicense"
+              ]
+            },
+            "url": {
+              "type": "string",
+              "description": "License URL"
+            }
+          }
+        }
+      ]
     },
     "homepage": {
       "type": "string",
