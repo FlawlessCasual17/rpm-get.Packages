@@ -11,13 +11,15 @@
     "description",
     "homepage",
     "notes",
-    "arch",
-    "auto_update"
+    "arch"
   ],
   "properties": {
     "supported_os": {
       "type": "array",
       "description": "List of operating systems supported by this package",
+      "items": {
+        "type": "string"
+      },
       "minItems": 1,
       "maxItems": 100
     },
@@ -121,7 +123,8 @@
             },
             "hash": {
               "type": "string",
-              "description": "Download hash for x86_64 architecture"
+              "description": "Download hash for x86_64 architecture",
+              "pattern": "^([a-fA-F0-9]{64}|(sha1|sha256|sha512|md5):([a-fA-F0-9]{32}|[a-fA-F0-9]{40}|[a-fA-F0-9]{64}|[a-fA-F0-9]{128}))$"
             }
           },
           "required": ["url", "hash"]
@@ -136,7 +139,8 @@
             },
             "hash": {
               "type": "string",
-              "description": "Download hash for x86 architecture"
+              "description": "Download hash for x86 architecture",
+              "pattern": "^([a-fA-F0-9]{64}|(sha1|sha256|sha512|md5):([a-fA-F0-9]{32}|[a-fA-F0-9]{40}|[a-fA-F0-9]{64}|[a-fA-F0-9]{128}))$"
             }
           },
           "required": ["url", "hash"]
@@ -151,7 +155,8 @@
             },
             "hash": {
               "type": "string",
-              "description": "Download hash for arm64 architecture"
+              "description": "Download hash for arm64 architecture",
+              "pattern": "^([a-fA-F0-9]{64}|(sha1|sha256|sha512|md5):([a-fA-F0-9]{32}|[a-fA-F0-9]{40}|[a-fA-F0-9]{64}|[a-fA-F0-9]{128}))$"
             }
           },
           "required": ["url", "hash"]
@@ -166,7 +171,8 @@
             },
             "hash": {
               "type": "string",
-              "description": "Download hash for aarch64 architecture"
+              "description": "Download hash for aarch64 architecture",
+              "pattern": "^([a-fA-F0-9]{64}|(sha1|sha256|sha512|md5):([a-fA-F0-9]{32}|[a-fA-F0-9]{40}|[a-fA-F0-9]{64}|[a-fA-F0-9]{128}))$"
             }
           },
           "required": ["url", "hash"]
@@ -340,7 +346,6 @@
         "check_version": {
           "type": "object",
           "description": "Configuration for checking package version",
-          "required": ["url", "regex"],
           "properties": {
             "url": {
               "type": "string",
@@ -350,7 +355,8 @@
               "type": "string",
               "description": "Regular expression to extract version information"
             }
-          }
+          },
+          "required": ["url", "regex"]
         },
         "arch": {
           "type": "object",
@@ -364,12 +370,23 @@
                   "type": "string",
                   "description": "Auto-update URL for x86_64 architecture"
                 },
-                "hash": {
-                  "type": "string",
-                  "description": "Auto-update hash for x86_64 architecture"
+                "check_hash": {
+                  "type": "object",
+                  "description": "Configuration for checking package hash",
+                  "properties": {
+                    "url": {
+                      "type": "string",
+                      "description": "URL to check for new versions"
+                    },
+                    "regex": {
+                      "type": "string",
+                      "description": "Regular expression to extract hash information"
+                    }
+                  },
+                  "required": ["url", "regex"]
                 }
               },
-              "required": ["url", "hash"]
+              "required": ["url"]
             },
             "x86": {
               "type": "object",
@@ -379,12 +396,23 @@
                   "type": "string",
                   "description": "Auto-update URL for x86 architecture"
                 },
-                "hash": {
-                  "type": "string",
-                  "description": "Auto-update hash for x86 architecture"
+                "check_hash": {
+                  "type": "object",
+                  "description": "Configuration for checking package hash",
+                  "properties": {
+                    "url": {
+                      "type": "string",
+                      "description": "URL to check for new versions"
+                    },
+                    "regex": {
+                      "type": "string",
+                      "description": "Regular expression to extract hash information"
+                    }
+                  },
+                  "required": ["url", "regex"]
                 }
               },
-              "required": ["url", "hash"]
+              "required": ["url"]
             },
             "arm64": {
               "type": "object",
@@ -394,12 +422,23 @@
                   "type": "string",
                   "description": "Auto-update URL for arm64 architecture"
                 },
-                "hash": {
-                  "type": "string",
-                  "description": "Auto-update hash for arm64 architecture"
+                "check_hash": {
+                  "type": "object",
+                  "description": "Configuration for checking package hash",
+                  "properties": {
+                    "url": {
+                      "type": "string",
+                      "description": "URL to check for new versions"
+                    },
+                    "regex": {
+                      "type": "string",
+                      "description": "Regular expression to extract hash information"
+                    }
+                  },
+                  "required": ["url", "regex"]
                 }
               },
-              "required": ["url", "hash"]
+              "required": ["url"]
             },
             "aarch64": {
               "type": "object",
@@ -409,12 +448,23 @@
                   "type": "string",
                   "description": "Auto-update URL for aarch64 architecture"
                 },
-                "hash": {
-                  "type": "string",
-                  "description": "Auto-update hash for aarch64 architecture"
+                "check_hash": {
+                  "type": "object",
+                  "description": "Configuration for checking package hash",
+                  "properties": {
+                    "url": {
+                      "type": "string",
+                      "description": "URL to check for new versions"
+                    },
+                    "regex": {
+                      "type": "string",
+                      "description": "Regular expression to extract hash information"
+                    }
+                  },
+                  "required": ["url", "regex"]
                 }
               },
-              "required": ["url", "hash"]
+              "required": ["url"]
             }
           },
           "required": ["check_version", "arch"]
