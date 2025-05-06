@@ -1,0 +1,290 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Package Configuration",
+  "description": "Schema for package configuration file",
+  "type": "object",
+  "required": [
+    "name",
+    "description",
+    "version",
+    "homepage",
+    "url",
+    "hash",
+    "notes",
+    "auto_update"
+  ],
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Package name"
+    },
+    "description": {
+      "type": "string",
+      "description": "Package description"
+    },
+    "version": {
+      "type": "string",
+      "description": "Package version"
+    },
+    "homepage": {
+      "type": "string",
+      "description": "Package homepage"
+    },
+    "url": {
+      "type": "string",
+      "description": "Package download URL"
+    },
+    "hash": {
+      "type": "string",
+      "description": "Package download hash"
+    },
+    "notes": {
+      "type": "string",
+      "description": "Additional notes about the package"
+    },
+    "repo": {
+      "type": "object",
+      "description": "Information about an RPM repository (Will eventually support Zypper repos)",
+      "properties": {
+        "url": {
+          "type": "string",
+          "description": "Package repository URL"
+        },
+        "requires_gpg": {
+          "type": "boolean",
+          "description": "Used to indicate that a package requires a GPG key to be installed",
+          "default": false
+        },
+        "gpg_key_url": {
+          "type": "string",
+          "description": "Repository GPG key URL"
+        }
+      },
+      "required": ["url"]
+    },
+    "requires_copr": {
+      "type": "boolean",
+      "description": "Used to indicate that a package is only available in Fedora COPR",
+      "default": false
+    },
+    "copr_repo": {
+      "type": "object",
+      "description": "Information about a Fedora COPR repository",
+      "properties": {
+        "user": {
+          "type": "string",
+          "description": "Copr user name"
+        },
+        "project": {
+          "type": "string",
+          "description": "Copr project name"
+        }
+      },
+      "required": ["user", "project"]
+    },
+    "arch": {
+      "type": "object",
+      "description": "Architecture-specific download information",
+      "properties": {
+        "x86_64": {
+          "type": "object",
+          "description": "x86_64 architecture (also works for amd64/64bit)",
+          "properties": {
+            "url": {
+              "type": "string",
+              "description": "Download URL for x86_64 architecture"
+            },
+            "hash": {
+              "type": "string",
+              "description": "Download hash for x86_64 architecture"
+            }
+          },
+          "required": ["url", "hash"]
+        },
+        "x86": {
+          "type": "object",
+          "description": "x86 architecture (also works for i386/32bit)",
+          "properties": {
+            "url": {
+              "type": "string",
+              "description": "Download URL for x86 architecture"
+            },
+            "hash": {
+              "type": "string",
+              "description": "Download hash for x86 architecture"
+            }
+          },
+          "required": ["url", "hash"]
+        },
+        "arm64": {
+          "type": "object",
+          "description": "arm64 architecture",
+          "properties": {
+            "url": {
+              "type": "string",
+              "description": "Download URL for arm64 architecture"
+            },
+            "hash": {
+              "type": "string",
+              "description": "Download hash for arm64 architecture"
+            }
+          },
+          "required": ["url", "hash"]
+        },
+        "aarch64": {
+          "type": "object",
+          "description": "aarch64 architecture",
+          "properties": {
+            "url": {
+              "type": "string",
+              "description": "Download URL for aarch64 architecture"
+            },
+            "hash": {
+              "type": "string",
+              "description": "Download hash for aarch64 architecture"
+            }
+          },
+          "required": ["url", "hash"]
+        }
+      }
+    },
+    "depends": {
+      "type": "array",
+      "description": "List of package dependencies",
+      "items": {
+        "type": "string"
+      }
+    },
+    "recommends": {
+      "type": "array",
+      "description": "List of recommended packages",
+      "items": {
+        "type": "string"
+      }
+    },
+    "suggests": {
+      "type": "array",
+      "description": "List of suggested packages",
+      "items": {
+        "type": "string"
+      }
+    },
+    "conflicts": {
+      "type": "array",
+      "description": "List of conflicting packages",
+      "items": {
+        "type": "string"
+      }
+    },
+    "replaces": {
+      "type": "array",
+      "description": "List of packages that this package replaces",
+      "items": {
+        "type": "string"
+      }
+    },
+    "provides": {
+      "type": "array",
+      "description": "List of features this package provides",
+      "items": {
+        "type": "string"
+      }
+    },
+    "auto_update": {
+      "type": "object",
+      "description": "Auto-update configuration",
+      "required": ["check_version", "url", "hash"],
+      "properties": {
+        "check_version": {
+          "type": "object",
+          "description": "Configuration for checking package version",
+          "required": ["url", "regex"],
+          "properties": {
+            "url": {
+              "type": "string",
+              "description": "URL to check for new versions"
+            },
+            "regex": {
+              "type": "string",
+              "description": "Regular expression to extract version information"
+            }
+          }
+        },
+        "url": {
+          "type": "string",
+          "description": "Download URL for auto-updates"
+        },
+        "hash": {
+          "type": "string",
+          "description": "Download hash for auto-updates"
+        },
+        "arch": {
+          "type": "object",
+          "description": "Architecture-specific auto-update information",
+          "properties": {
+            "x86_64": {
+              "type": "object",
+              "description": "x86_64 architecture (also works for amd64/64bit)",
+              "properties": {
+                "url": {
+                  "type": "string",
+                  "description": "Auto-update URL for x86_64 architecture"
+                },
+                "hash": {
+                  "type": "string",
+                  "description": "Auto-update hash for x86_64 architecture"
+                }
+              },
+              "required": ["url", "hash"]
+            },
+            "x86": {
+              "type": "object",
+              "description": "x86 architecture (also works for i386/32bit)",
+              "properties": {
+                "url": {
+                  "type": "string",
+                  "description": "Auto-update URL for x86 architecture"
+                },
+                "hash": {
+                  "type": "string",
+                  "description": "Auto-update hash for x86 architecture"
+                }
+              },
+              "required": ["url", "hash"]
+            },
+            "arm64": {
+              "type": "object",
+              "description": "arm64 architecture",
+              "properties": {
+                "url": {
+                  "type": "string",
+                  "description": "Auto-update URL for arm64 architecture"
+                },
+                "hash": {
+                  "type": "string",
+                  "description": "Auto-update hash for arm64 architecture"
+                }
+              },
+              "required": ["url", "hash"]
+            },
+            "aarch64": {
+              "type": "object",
+              "description": "aarch64 architecture",
+              "properties": {
+                "url": {
+                  "type": "string",
+                  "description": "Auto-update URL for aarch64 architecture"
+                },
+                "hash": {
+                  "type": "string",
+                  "description": "Auto-update hash for aarch64 architecture"
+                }
+              },
+              "required": ["url", "hash"]
+            }
+          }
+        }
+      }
+    }
+  }
+}

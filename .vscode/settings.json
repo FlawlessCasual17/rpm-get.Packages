@@ -1,0 +1,7 @@
+{
+  "yaml.schemas": {
+    "https://github.com/FlawlessCasual17/rpm-get.Packages/raw/refs/heads/master/package-manifest.schema.json": [
+      "manifests/*.yaml"
+    ]
+  }
+}
