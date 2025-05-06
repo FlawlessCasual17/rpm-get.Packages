@@ -1,9 +1,10 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
   "title": "Package Manifest Schema",
-  "description": "Schema for package manifest file",
+  "description": "Schema for package manifests",
   "type": "object",
   "required": [
+    "supported_os",
     "version",
     "name",
     "description",
@@ -13,6 +14,12 @@
     "auto_update"
   ],
   "properties": {
+    "supported_os": {
+      "type": "array",
+      "description": "List of operating systems supported by this package",
+      "minItems": 1,
+      "maxItems": 100
+    },
     "version": {
       "type": "string",
       "description": "Package version"
@@ -100,19 +107,38 @@
       }
     },
     "repo": {
-      "type": "object",
-      "description": "Information about an RPM repository (Will eventually support Zypper repos)",
-      "properties": {
-        "url": {
-          "type": "string",
-          "description": "Package repository URL"
+      "anyOf": [
+        {
+          "type": "object",
+          "description": "Information about an RPM/COPR repository (Will eventually support Zypper repos)",
+          "properties": {
+            "url": {
+              "type": "string",
+              "description": "Package repository URL"
+            },
+            "gpg_key_url": {
+              "type": "string",
+              "description": "Repository GPG key URL"
+            }
+          },
+          "required": ["url"]
         },
-        "gpg_key_url": {
-          "type": "string",
-          "description": "Repository GPG key URL"
+        {
+          "type": "object",
+          "description": "Information about an RPM/COPR repository (Will eventually support Zypper repos)",
+          "properties": {
+            "user": {
+              "type": "string",
+              "description": "Copr user name"
+            },
+            "project": {
+              "type": "string",
+              "description": "Copr project name"
+            }
+          },
+          "required": ["user", "project"]
         }
-      },
-      "required": ["url"]
+      ]
     },
     "github": {
       "anyOf": [
@@ -147,7 +173,7 @@
         },
         {
           "type": "string",
-          "description": "Information about a GitLab repository. This must be in the format 'owner/project'",
+          "description": "Information about a GitLab repository. This must be in the format 'profile/project'",
           "pattern": "^[a-zA-Z0-9_-]+/[a-zA-Z0-9_-]+$"
         },
         {
@@ -198,21 +224,6 @@
         }
       ]
     },
-    "copr": {
-      "type": "object",
-      "description": "Information about a Fedora COPR repository",
-      "properties": {
-        "user": {
-          "type": "string",
-          "description": "Copr user name"
-        },
-        "project": {
-          "type": "string",
-          "description": "Copr project name"
-        }
-      },
-      "required": ["user", "project"]
-    },
     "depends": {
       "type": "array",
       "description": "List of package dependencies",
@@ -258,7 +269,6 @@
     "auto_update": {
       "type": "object",
       "description": "Auto-update configuration",
-      "required": ["check_version", "url", "hash"],
       "properties": {
         "check_version": {
           "type": "object",
@@ -274,14 +284,6 @@
               "description": "Regular expression to extract version information"
             }
           }
-        },
-        "url": {
-          "type": "string",
-          "description": "Download URL for auto-updates"
-        },
-        "hash": {
-          "type": "string",
-          "description": "Download hash for auto-updates"
         },
         "arch": {
           "type": "object",
@@ -347,7 +349,8 @@
               },
               "required": ["url", "hash"]
             }
-          }
+          },
+          "required": ["check_version", "arch"]
         }
       }
     }
