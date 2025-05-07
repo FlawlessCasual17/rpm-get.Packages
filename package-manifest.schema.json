@@ -358,20 +358,6 @@
                   "type": "object",
                   "description": "Information about a GitLab repository",
                   "properties": {
-                    "group": {
-                      "type": "string",
-                      "description": "GitLab group name"
-                    },
-                    "project": {
-                      "type": "string",
-                      "description": "GitLab project name"
-                    }
-                  }
-                },
-                {
-                  "type": "object",
-                  "description": "Information about a GitLab repository",
-                  "properties": {
                     "profile": {
                       "type": "string",
                       "description": "GitLab profile name"
