@@ -25,6 +25,7 @@
           "centos",
           "rocky",
           "alma",
+          "rhel",
           "amazon-linux",
           "openSUSE-tumbleweed",
           "openSUSE-leap",
