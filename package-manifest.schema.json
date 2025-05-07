@@ -290,15 +290,6 @@
               "type": "string",
               "description": "XPath to extract version information. Only for HTML and XML"
             },
-            "element_refs": {
-              "type": "array",
-              "description": "Array of HTML element references used for parsing the website",
-              "items": {
-                "type": "string"
-              },
-              "minItems": 2,
-              "maxItems": 2
-            },
             "regex": {
               "type": "string",
               "description": "Regular expression to extract version information"
