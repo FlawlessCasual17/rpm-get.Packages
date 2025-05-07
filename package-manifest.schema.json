@@ -19,18 +19,18 @@
       "minItems": 1,
       "maxItems": 100,
       "items": {
-        "type": "string"
-      },
-      "examples": [
-        "fedora",
-        "centos",
-        "rocky",
-        "alma",
-        "amazon-linux",
-        "openSUSE-tumbleweed",
-        "openSUSE-leap",
-        "nobara"
-      ]
+        "type": "string",
+        "examples": [
+          "fedora",
+          "centos",
+          "rocky",
+          "alma",
+          "amazon-linux",
+          "openSUSE-tumbleweed",
+          "openSUSE-leap",
+          "nobara"
+        ]
+      }
     },
     "version": {
       "type": "string",
