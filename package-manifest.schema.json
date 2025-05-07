@@ -16,7 +16,7 @@
   "properties": {
     "supported_os": {
       "type": "array",
-      "description": "List of operating systems supported by this package",
+      "description": "List of operating systems (that use RPM/Fedora COPR) supported by this package",
       "items": {
         "type": "string"
       },
