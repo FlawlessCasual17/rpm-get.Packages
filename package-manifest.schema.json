@@ -228,90 +228,6 @@
         }
       ]
     },
-    "github": {
-      "anyOf": [
-        {
-          "type": "string",
-          "description": "Information about a GitHub repository. This must be in the format 'username/repository-name'",
-          "pattern": "^[a-zA-Z0-9_-]+/[a-zA-Z0-9_-]+$"
-        },
-        {
-          "type": "object",
-          "description": "Information about a GitHub repository",
-          "properties": {
-            "owner": {
-              "type": "string",
-              "description": "Can either be a GitHub username or organization name"
-            },
-            "repo": {
-              "type": "string",
-              "description": "GitHub repository name"
-            }
-          },
-          "required": ["creator", "repo"]
-        }
-      ]
-    },
-    "gitlab": {
-      "anyOf": [
-        {
-          "type": "string",
-          "description": "Information about a GitLab repository. This must be in the format 'group/sub-group/project'",
-          "pattern": "^[a-zA-Z0-9_-]+/[a-zA-Z0-9_-]+/[a-zA-Z0-9_-]+$"
-        },
-        {
-          "type": "string",
-          "description": "Information about a GitLab repository. This must be in the format 'profile/project'",
-          "pattern": "^[a-zA-Z0-9_-]+/[a-zA-Z0-9_-]+$"
-        },
-        {
-          "type": "object",
-          "description": "Information about a GitLab repository",
-          "properties": {
-            "group": {
-              "type": "string",
-              "description": "GitLab group name"
-            },
-            "sub_group": {
-              "type": "string",
-              "description": "GitLab sub-group name"
-            },
-            "project": {
-              "type": "string",
-              "description": "GitLab project name"
-            }
-          }
-        },
-        {
-          "type": "object",
-          "description": "Information about a GitLab repository",
-          "properties": {
-            "group": {
-              "type": "string",
-              "description": "GitLab group name"
-            },
-            "project": {
-              "type": "string",
-              "description": "GitLab project name"
-            }
-          }
-        },
-        {
-          "type": "object",
-          "description": "Information about a GitLab repository",
-          "properties": {
-            "profile": {
-              "type": "string",
-              "description": "GitLab profile name"
-            },
-            "project": {
-              "type": "string",
-              "description": "GitLab project name"
-            }
-          }
-        }
-      ]
-    },
     "depends": {
       "type": "array",
       "description": "List of package dependencies",
@@ -369,9 +285,92 @@
             "regex": {
               "type": "string",
               "description": "Regular expression to extract version information"
+            },
+            "github": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "description": "Information about a GitHub repository. This must be in the format 'username/repository-name'",
+                  "pattern": "^[a-zA-Z0-9_-]+/[a-zA-Z0-9_-]+$"
+                },
+                {
+                  "type": "object",
+                  "description": "Information about a GitHub repository",
+                  "properties": {
+                    "owner": {
+                      "type": "string",
+                      "description": "Can either be a GitHub username or organization name"
+                    },
+                    "repo": {
+                      "type": "string",
+                      "description": "GitHub repository name"
+                    }
+                  },
+                  "required": ["creator", "repo"]
+                }
+              ]
+            },
+            "gitlab": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "description": "Information about a GitLab repository. This must be in the format 'group/sub-group/project'",
+                  "pattern": "^[a-zA-Z0-9_-]+/[a-zA-Z0-9_-]+/[a-zA-Z0-9_-]+$"
+                },
+                {
+                  "type": "string",
+                  "description": "Information about a GitLab repository. This must be in the format 'profile/project'",
+                  "pattern": "^[a-zA-Z0-9_-]+/[a-zA-Z0-9_-]+$"
+                },
+                {
+                  "type": "object",
+                  "description": "Information about a GitLab repository",
+                  "properties": {
+                    "group": {
+                      "type": "string",
+                      "description": "GitLab group name"
+                    },
+                    "sub_group": {
+                      "type": "string",
+                      "description": "GitLab sub-group name"
+                    },
+                    "project": {
+                      "type": "string",
+                      "description": "GitLab project name"
+                    }
+                  }
+                },
+                {
+                  "type": "object",
+                  "description": "Information about a GitLab repository",
+                  "properties": {
+                    "group": {
+                      "type": "string",
+                      "description": "GitLab group name"
+                    },
+                    "project": {
+                      "type": "string",
+                      "description": "GitLab project name"
+                    }
+                  }
+                },
+                {
+                  "type": "object",
+                  "description": "Information about a GitLab repository",
+                  "properties": {
+                    "profile": {
+                      "type": "string",
+                      "description": "GitLab profile name"
+                    },
+                    "project": {
+                      "type": "string",
+                      "description": "GitLab project name"
+                    }
+                  }
+                }
+              ]
             }
-          },
-          "required": ["url", "regex"]
+          }
         },
         "arch": {
           "type": "object",
