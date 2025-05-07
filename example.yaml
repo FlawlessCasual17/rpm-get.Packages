@@ -1,0 +1,83 @@
+# NOTE: This was generated using Gemini 2.5 Flash (expermental)
+
+# Example YAML file based on the Package Manifest Schema
+
+supported_os:
+  - fedora
+  - centos
+  - rocky
+  - alma
+
+version: "1.2.3"
+
+name: "example-package"
+
+license: "MIT" # Or use an object with identifier and url
+
+description: "This is an example package manifest file."
+
+homepage: "https://example.com/example-package"
+
+notes: |
+  This package provides utility functions.
+  Check the homepage for more details.
+
+arch:
+  x86_64:
+    url: "https://example.com/downloads/example-package-1.2.3-x86_64.rpm"
+    hash: "sha256:a1b2c3d4e5f67890a1b2c3d4e5f67890a1b2c3d4e5f67890a1b2c3d4e5f67890"
+  # You can include other architectures like x86, arm64, aarch64 if available:
+  # x86:
+  #   url: "https://example.com/downloads/example-package-1.2.3-i386.rpm"
+  #   hash: "md5:g1h2i3j4k5l6m7n8o9p0q1r2s3t4u5v6"
+  # arm64:
+  #   url: "https://example.com/downloads/example-package-1.2.3-arm64.rpm"
+  #   hash: "sha512:0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef"
+
+# Optional fields:
+depends:
+  - dependency-package-1
+  - dependency-package-2
+
+recommends:
+  - recommended-package
+
+repo:
+  url: "https://copr.fedorainfracloud.org/coprs/username/projectname/"
+  gpg_key_url: "https://copr.fedorainfracloud.org/coprs/username/projectname/repo/gpg-key.gpg"
+  # Or use the username/project format for Copr:
+  # username: "username"
+  # project: "projectname"
+
+# github: "username/repository"
+# # Or using the object format:
+# # github:
+# #   owner: "username"
+# #   repo: "repository"
+
+# gitlab: "group/project"
+# # Or using other formats:
+# # gitlab: "profile/project"
+# # gitlab: "group/sub-group/project"
+# # Or using object formats:
+# # gitlab:
+# #   group: "group"
+# #   project: "project"
+# # gitlab:
+# #   profile: "profile"
+# #   project: "project"
+# # gitlab:
+# #   group: "group"
+# #   sub_group: "sub-group"
+# #   project: "project"
+
+# auto_update:
+#   check_version:
+#     url: "https://example.com/latest-version"
+#     regex: '"version":\s*"([^"]+)"' # Example regex to extract version from JSON
+#   arch:
+#     x86_64:
+#       url: "https://example.com/downloads/latest/x86_64/"
+#       check_hash:
+#         url: "https://example.com/downloads/latest/x86_64/SHA256SUMS"
+#         regex: 'example-package-latest-x86_64.rpm\s+([a-fA-F0-9]{64})' # Example regex to extract hash from checksum file
