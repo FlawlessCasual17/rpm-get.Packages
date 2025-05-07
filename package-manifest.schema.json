@@ -16,12 +16,22 @@
   "properties": {
     "supported_os": {
       "type": "array",
-      "description": "List of operating systems (that use RPM/Fedora COPR) supported by this package",
+      "description": "List of operating systems (that use RPM) supported by this package",
+      "minItems": 1,
+      "maxItems": 100,
       "items": {
         "type": "string"
       },
-      "minItems": 1,
-      "maxItems": 100
+      "examples": [
+        "fedora",
+        "centos",
+        "rocky",
+        "alma",
+        "amazon-linux",
+        "openSUSE-tumbleweed",
+        "openSUSE-leap",
+        "nobara"
+      ]
     },
     "version": {
       "type": "string",
