@@ -276,11 +276,19 @@
       "properties": {
         "check_version": {
           "type": "object",
-          "description": "Configuration for checking package version",
+          "description": "Configuration for checking package version. If using the `github`/`gitlab` objects, it will try to use the latest version by default. To disable this behavior, set `use_latest` to `false`",
           "properties": {
             "url": {
               "type": "string",
               "description": "URL to check for new versions"
+            },
+            "jsonpath": {
+              "type": "string",
+              "description": "JSONPath to extract version information"
+            },
+            "xpath": {
+              "type": "string",
+              "description": "XPath to extract version information. Only for HTML and XML"
             },
             "element_refs": {
               "type": "array",
@@ -295,16 +303,22 @@
               "type": "string",
               "description": "Regular expression to extract version information"
             },
+            "use_latest": {
+              "type": "boolean",
+              "description": "Try to use the latest version. Only works with GitHub, GitLab, GitTea, Gogs, Forgejo, and Codeberg",
+              "default": false
+            },
             "github": {
+              "description": "Can also be used with Gitea, Gogs, Forgejo, and Codeberg.",
               "anyOf": [
                 {
                   "type": "string",
-                  "description": "Information about a GitHub repository. This must be in the format 'username/repository-name'",
+                  "description": "Information about a GitHub (Gitea, Gogs, Forgejo, and Codeberg) repository. This must be in the format 'username/repository-name'",
                   "pattern": "^[a-zA-Z0-9_-]+/[a-zA-Z0-9_-]+$"
                 },
                 {
                   "type": "object",
-                  "description": "Information about a GitHub repository",
+                  "description": "Information about a GitHub (Gitea, Gogs, Forgejo, and Codeberg) repository",
                   "properties": {
                     "owner": {
                       "type": "string",
