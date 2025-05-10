@@ -310,6 +310,19 @@
               "type": "string",
               "description": "Regular expression to extract version information"
             },
+            "regex_replace": {
+              "type": "string",
+              "description": "Use regex subtitution to manipulate the captured regex group(s). To learn more about regex substitution see, https://www.tutorialsteacher.com/regex/substitution",
+              "examples": [
+                "$1-$2",
+                "$1",
+                "$1$2",
+                "${1}.${2}",
+                "${1}-${2}",
+                "${a}${b}",
+                "$a$b"
+              ]
+            },
             "use_latest": {
               "type": "boolean",
               "description": "Try to use the latest version. Only works with GitHub, GitLab, GitTea, Gogs, Forgejo, and Codeberg",
