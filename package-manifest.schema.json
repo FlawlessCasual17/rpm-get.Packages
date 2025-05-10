@@ -290,6 +290,22 @@
               "type": "string",
               "description": "XPath to extract version information. Only for HTML and XML"
             },
+            "script": {
+              "type": "object",
+              "description": "Custom script to extract version information. Supports BASH, FISH, ZSH, PowerShell (pwsh), Nushell, and Python",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "description": "Script type",
+                  "enum": ["bash", "fish", "zsh", "powershell", "nushell", "python"],
+                  "default": "bash"
+                },
+                "run": {
+                  "type": "string",
+                  "description": "The script to run"
+                }
+              }
+            },
             "regex": {
               "type": "string",
               "description": "Regular expression to extract version information"
