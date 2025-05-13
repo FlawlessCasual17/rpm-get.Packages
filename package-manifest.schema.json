@@ -460,32 +460,6 @@
                 }
               },
               "required": ["url"]
-            },
-            "aarch64": {
-              "type": "object",
-              "description": "aarch64 architecture",
-              "properties": {
-                "url": {
-                  "type": "string",
-                  "description": "Auto-update URL for aarch64 architecture"
-                },
-                "check_hash": {
-                  "type": "object",
-                  "description": "Configuration for checking package hash",
-                  "properties": {
-                    "url": {
-                      "type": "string",
-                      "description": "URL to check for hash information"
-                    },
-                    "regex": {
-                      "type": "string",
-                      "description": "Regular expression to extract hash information"
-                    }
-                  },
-                  "required": ["url", "regex"]
-                }
-              },
-              "required": ["url"]
             }
           }
         }
