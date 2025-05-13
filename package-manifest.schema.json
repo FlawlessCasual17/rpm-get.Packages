@@ -162,7 +162,7 @@
         },
         "arm64": {
           "type": "object",
-          "description": "arm64 architecture",
+          "description": "arm64 architecture (also works for aarch64)",
           "properties": {
             "url": {
               "type": "string",
@@ -171,22 +171,6 @@
             "hash": {
               "type": "string",
               "description": "Download hash for arm64 architecture",
-              "pattern": "^([a-fA-F0-9]{64}|(sha1|sha256|sha512|md5):([a-fA-F0-9]{32}|[a-fA-F0-9]{40}|[a-fA-F0-9]{64}|[a-fA-F0-9]{128}))$"
-            }
-          },
-          "required": ["url", "hash"]
-        },
-        "aarch64": {
-          "type": "object",
-          "description": "aarch64 architecture",
-          "properties": {
-            "url": {
-              "type": "string",
-              "description": "Download URL for aarch64 architecture"
-            },
-            "hash": {
-              "type": "string",
-              "description": "Download hash for aarch64 architecture",
               "pattern": "^([a-fA-F0-9]{64}|(sha1|sha256|sha512|md5):([a-fA-F0-9]{32}|[a-fA-F0-9]{40}|[a-fA-F0-9]{64}|[a-fA-F0-9]{128}))$"
             }
           },
