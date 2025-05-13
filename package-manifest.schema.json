@@ -510,7 +510,7 @@
               "required": ["url"]
             }
           },
-          "required": ["check_version", "arch"]
+          "required": ["check_version"]
         }
       }
     }
