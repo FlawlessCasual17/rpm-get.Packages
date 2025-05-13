@@ -2,6 +2,102 @@
   "$schema": "http://json-schema.org/draft-07/schema#",
   "title": "Package Manifest Schema",
   "description": "Schema for package manifests",
+  "definitions": {
+    "license_string": {
+      "type": "string",
+      "description": "Package license based on SPDX license format, and license list: https://spdx.org/licenses/",
+      "examples": [
+        "Apache-2.0",
+        "BSD-3-Clause",
+        "Freeware",
+        "GPL-2.0",
+        "GPL-2.0-only",
+        "GPL-2.0-or-later",
+        "GPL-3.0-only",
+        "GPL-3.0-or-later",
+        "GPL-3.0",
+        "ISC",
+        "LGPL-2.0-only",
+        "LGPL-2.0-or-later",
+        "LGPL-2.1-only",
+        "LGPL-2.1-or-later",
+        "LGPL-3.0-only",
+        "LGPL-3.0-or-later",
+        "MIT",
+        "MS-PL",
+        "Proprietary",
+        "Public Domain",
+        "Shareware",
+        "Unlicense"
+      ]
+    },
+    "pkg_arch": {
+      "type": "object",
+      "description": "Architecture-specific download information",
+      "properties": {
+        "url": {
+          "type": "string",
+          "description": "Download URL for the architecture"
+        },
+        "hash": {
+          "type": "string",
+          "description": "Download hash for the architecture",
+          "pattern": "^([a-fA-F0-9]{64}|(sha1|sha256|sha512|md5):([a-fA-F0-9]{32}|[a-fA-F0-9]{40}|[a-fA-F0-9]{64}|[a-fA-F0-9]{128}))$"
+        }
+      },
+      "required": ["url", "hash"]
+    },
+    "auto_update_pkg_arch": {
+      "type": "object",
+      "description": "Auto-update architecture-specific configuration",
+      "properties": {
+        "url": {
+          "type": "string",
+          "description": "Auto-update URL for the architecture"
+        },
+        "check_hash": {
+          "type": "object",
+          "description": "Configuration for checking package hash",
+          "properties": {
+            "url": {
+              "type": "string",
+              "description": "URL to check for hash information"
+            },
+            "regex": {
+              "type": "string",
+              "description": "Regular expression to extract hash information"
+            },
+            "jsonpath": {
+              "type": "string",
+              "description": "JSONPath to extract version information"
+            },
+            "xpath": {
+              "type": "string",
+              "description": "XPath to extract version information. Only for HTML and XML"
+            },
+            "script": {
+              "type": "object",
+              "description": "Custom script to extract version information. Supports BASH, FISH, ZSH, PowerShell (pwsh), Nushell, and Python",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "description": "Script type",
+                  "enum": ["bash", "fish", "zsh", "powershell", "nushell", "python"],
+                  "default": "bash"
+                },
+                "run": {
+                  "type": "string",
+                  "description": "The script to run"
+                }
+              }
+            }
+          },
+          "required": ["url", "regex"]
+        }
+      },
+      "required": ["url", "check_hash"]
+    }
+  },
   "type": "object",
   "required": [
     "supported_os",
@@ -45,64 +141,14 @@
     "license": {
       "anyOf": [
         {
-          "type": "string",
-          "description": "Package license based on SPDX license format, and license list: https://spdx.org/licenses/",
-          "examples": [
-            "Apache-2.0",
-            "BSD-3-Clause",
-            "Freeware",
-            "GPL-2.0",
-            "GPL-2.0-only",
-            "GPL-2.0-or-later",
-            "GPL-3.0-only",
-            "GPL-3.0-or-later",
-            "GPL-3.0",
-            "ISC",
-            "LGPL-2.0-only",
-            "LGPL-2.0-or-later",
-            "LGPL-2.1-only",
-            "LGPL-2.1-or-later",
-            "LGPL-3.0-only",
-            "LGPL-3.0-or-later",
-            "MIT",
-            "MS-PL",
-            "Proprietary",
-            "Public Domain",
-            "Shareware",
-            "Unlicense"
-          ]
+          "$ref": "#/$defs/license_string"
         },
         {
           "type": "object",
           "description": "Package license based on SPDX license format, and license list: https://spdx.org/licenses/",
           "properties": {
             "identifier": {
-              "type": "string",
-              "description": "License identifier",
-              "examples": [
-                "Apache-2.0",
-                "BSD-3-Clause",
-                "Freeware",
-                "GPL-2.0",
-                "GPL-2.0-only",
-                "GPL-2.0-or-later",
-                "GPL-3.0-only",
-                "GPL-3.0-or-later",
-                "GPL-3.0",
-                "ISC",
-                "LGPL-2.0-only",
-                "LGPL-2.0-or-later",
-                "LGPL-2.1-only",
-                "LGPL-2.1-or-later",
-                "LGPL-3.0-only",
-                "LGPL-3.0-or-later",
-                "MIT",
-                "MS-PL",
-                "Proprietary",
-                "Public Domain",
-                "Shareware",
-                "Unlicense"
-              ]
+              "$ref": "#/$defs/license_string"
             },
             "url": {
               "type": "string",
@@ -129,52 +175,13 @@
       "description": "Architecture-specific download information",
       "properties": {
         "x86_64": {
-          "type": "object",
-          "description": "x86_64 architecture (also works for amd64/64bit)",
-          "properties": {
-            "url": {
-              "type": "string",
-              "description": "Download URL for x86_64 architecture"
-            },
-            "hash": {
-              "type": "string",
-              "description": "Download hash for x86_64 architecture",
-              "pattern": "^([a-fA-F0-9]{64}|(sha1|sha256|sha512|md5):([a-fA-F0-9]{32}|[a-fA-F0-9]{40}|[a-fA-F0-9]{64}|[a-fA-F0-9]{128}))$"
-            }
-          },
-          "required": ["url", "hash"]
+          "$ref": "#/$defs/pkg_arch"
         },
         "x86": {
-          "type": "object",
-          "description": "x86 architecture (also works for i386/32bit)",
-          "properties": {
-            "url": {
-              "type": "string",
-              "description": "Download URL for x86 architecture"
-            },
-            "hash": {
-              "type": "string",
-              "description": "Download hash for x86 architecture",
-              "pattern": "^([a-fA-F0-9]{64}|(sha1|sha256|sha512|md5):([a-fA-F0-9]{32}|[a-fA-F0-9]{40}|[a-fA-F0-9]{64}|[a-fA-F0-9]{128}))$"
-            }
-          },
-          "required": ["url", "hash"]
+          "$ref": "#/$defs/pkg_arch"
         },
         "arm64": {
-          "type": "object",
-          "description": "arm64 architecture (also works for aarch64)",
-          "properties": {
-            "url": {
-              "type": "string",
-              "description": "Download URL for arm64 architecture"
-            },
-            "hash": {
-              "type": "string",
-              "description": "Download hash for arm64 architecture",
-              "pattern": "^([a-fA-F0-9]{64}|(sha1|sha256|sha512|md5):([a-fA-F0-9]{32}|[a-fA-F0-9]{40}|[a-fA-F0-9]{64}|[a-fA-F0-9]{128}))$"
-            }
-          },
-          "required": ["url", "hash"]
+          "$ref": "#/$defs/pkg_arch"
         }
       }
     },
@@ -384,82 +391,13 @@
           "description": "Architecture-specific auto-update information",
           "properties": {
             "x86_64": {
-              "type": "object",
-              "description": "x86_64 architecture (also works for amd64/64bit)",
-              "properties": {
-                "url": {
-                  "type": "string",
-                  "description": "Auto-update URL for x86_64 architecture"
-                },
-                "check_hash": {
-                  "type": "object",
-                  "description": "Configuration for checking package hash",
-                  "properties": {
-                    "url": {
-                      "type": "string",
-                      "description": "URL to check for hash information"
-                    },
-                    "regex": {
-                      "type": "string",
-                      "description": "Regular expression to extract hash information"
-                    }
-                  },
-                  "required": ["url", "regex"]
-                }
-              },
-              "required": ["url"]
+              "$ref": "#/$defs/auto_update_pkg_arch"
             },
             "x86": {
-              "type": "object",
-              "description": "x86 architecture (also works for i386/32bit)",
-              "properties": {
-                "url": {
-                  "type": "string",
-                  "description": "Auto-update URL for x86 architecture"
-                },
-                "check_hash": {
-                  "type": "object",
-                  "description": "Configuration for checking package hash",
-                  "properties": {
-                    "url": {
-                      "type": "string",
-                      "description": "URL to check for hash information"
-                    },
-                    "regex": {
-                      "type": "string",
-                      "description": "Regular expression to extract hash information"
-                    }
-                  },
-                  "required": ["url", "regex"]
-                }
-              },
-              "required": ["url"]
+              "$ref": "#/$defs/auto_update_pkg_arch"
             },
             "arm64": {
-              "type": "object",
-              "description": "arm64 architecture",
-              "properties": {
-                "url": {
-                  "type": "string",
-                  "description": "Auto-update URL for arm64 architecture"
-                },
-                "check_hash": {
-                  "type": "object",
-                  "description": "Configuration for checking package hash",
-                  "properties": {
-                    "url": {
-                      "type": "string",
-                      "description": "URL to check for hash information"
-                    },
-                    "regex": {
-                      "type": "string",
-                      "description": "Regular expression to extract hash information"
-                    }
-                  },
-                  "required": ["url", "regex"]
-                }
-              },
-              "required": ["url"]
+              "$ref": "#/$defs/auto_update_pkg_arch"
             }
           }
         }
