@@ -18,5 +18,5 @@ auto_update:
     x86_64:
       url: https://github.com/bitwarden/clients/releases/download/desktop-v$version/Bitwarden-$version-x86_64.rpm
       check_hash:
-        url: $baseurl/latest-linux.yml
+        url: $baseurl/sha256-checksums.txt
         regex: $basename.*$sha256
