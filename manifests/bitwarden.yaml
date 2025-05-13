@@ -1,9 +1,22 @@
-DEFVER=1
-get_github_releases "bitwarden/clients"
-if [ "${ACTION}" != "prettylist" ]; then
-    URL=$(grep -m 1 "browser_download_url.*${HOST_ARCH}\.deb\"" "${CACHE_FILE}" | cut -d'"' -f4)
-    VERSION_PUBLISHED=$(echo "${URL}" | cut -d'/' -f8 | tr -d desktop-v-)
-fi
-PRETTY_NAME="Bitwarden"
-WEBSITE="https://bitwarden.com/"
-SUMMARY="Open Source Password Manager."
+supported_os:
+  - all
+version: 2025.4.2
+homepage: https://bitwarden.com/
+license: GPL-3.0
+name: bitwarden
+description: Open Source Password Manager.
+arch:
+  x86_64:
+    url: https://github.com/bitwarden/clients/releases/download/desktop-v2025.4.2/Bitwarden-2025.4.2-x86_64.rpm
+    hash: sha256:6be030cc6258c149bd22802f99fa925d257d161b5d47db6567726b352074d586
+auto_update:
+  check_version:
+    url: https://api.github.com/repos/bitwarden/clients/releases
+    jsonpath: $[0].name
+    regex: 'Desktop\sv([\d.]+)'
+  arch:
+    x86_64:
+      url: https://github.com/bitwarden/clients/releases/download/desktop-v$version/Bitwarden-$version-x86_64.rpm
+      check_hash:
+        url: $baseurl/latest-linux.yml
+        regex: $basename.*$sha256
