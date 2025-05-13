@@ -509,10 +509,10 @@
               },
               "required": ["url"]
             }
-          },
-          "required": ["check_version"]
+          }
         }
-      }
+      },
+      "required": ["check_version", "arch"]
     }
   }
 }
