@@ -76,7 +76,7 @@
               "description": "XPath to extract version information. Only for HTML and XML"
             },
             "script": {
-              "type": "object",
+              "script_type": "object",
               "description": "Custom script to extract version information. Supports BASH, FISH, ZSH, PowerShell (pwsh), Nushell, and Python",
               "properties": {
                 "type": {
@@ -334,7 +334,7 @@
                       "description": "GitHub repository name"
                     }
                   },
-                  "required": ["creator", "repo"]
+                  "required": ["owner", "repo"]
                 }
               ]
             },
