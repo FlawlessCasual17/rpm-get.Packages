@@ -266,6 +266,7 @@
     "auto_update": {
       "type": "object",
       "description": "Auto-update configuration",
+      "required": ["check_version", "arch"],
       "properties": {
         "check_version": {
           "type": "object",
@@ -504,8 +505,7 @@
             }
           }
         }
-      },
-      "required": ["check_version", "arch"]
+      }
     }
   }
 }
