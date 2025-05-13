@@ -69,15 +69,15 @@
             },
             "jsonpath": {
               "type": "string",
-              "description": "JSONPath to extract version information"
+              "description": "JSONPath to extract hash information"
             },
             "xpath": {
               "type": "string",
-              "description": "XPath to extract version information. Only for HTML and XML"
+              "description": "XPath to extract hash information. Only for HTML and XML"
             },
             "script": {
               "script_type": "object",
-              "description": "Custom script to extract version information. Supports BASH, FISH, ZSH, PowerShell (pwsh), Nushell, and Python",
+              "description": "Custom script to extract hash information. Supports BASH, FISH, ZSH, PowerShell (pwsh), Nushell, and Python",
               "properties": {
                 "type": {
                   "type": "string",
