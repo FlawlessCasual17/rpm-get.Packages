@@ -263,13 +263,6 @@
         "type": "string"
       }
     },
-    "provides": {
-      "type": "array",
-      "description": "List of features this package provides",
-      "items": {
-        "type": "string"
-      }
-    },
     "auto_update": {
       "type": "object",
       "description": "Auto-update configuration",
