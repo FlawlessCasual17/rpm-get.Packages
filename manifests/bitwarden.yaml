@@ -4,7 +4,7 @@ version: 2025.4.2
 homepage: https://bitwarden.com/
 license: GPL-3.0
 name: bitwarden
-description: Open Source Password Manager.
+description: 'Open Source Password Manager.'
 arch:
   x86_64:
     url: https://github.com/bitwarden/clients/releases/download/desktop-v2025.4.2/Bitwarden-2025.4.2-x86_64.rpm
