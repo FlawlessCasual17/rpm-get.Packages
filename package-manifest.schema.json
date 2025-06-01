@@ -38,64 +38,18 @@
         "url": {
           "type": "string",
           "description": "Download URL for the architecture"
-        },
-        "hash": {
-          "type": "string",
-          "description": "Download hash for the architecture",
-          "pattern": "^([a-fA-F0-9]{64}|(sha1|sha256|sha512|md5):([a-fA-F0-9]{32}|[a-fA-F0-9]{40}|[a-fA-F0-9]{64}|[a-fA-F0-9]{128}))$"
         }
-      },
-      "required": ["url", "hash"]
+      }
     },
     "auto_update_pkg_arch": {
       "type": "object",
-      "description": "Auto-update architecture-specific configuration",
+      "description": "Auto-update architecture-specific download information",
       "properties": {
         "url": {
           "type": "string",
-          "description": "Auto-update URL for the architecture"
-        },
-        "check_hash": {
-          "type": "object",
-          "description": "Configuration for checking package hash",
-          "properties": {
-            "url": {
-              "type": "string",
-              "description": "URL to check for hash information"
-            },
-            "regex": {
-              "type": "string",
-              "description": "Regular expression to extract hash information"
-            },
-            "jsonpath": {
-              "type": "string",
-              "description": "JSONPath to extract hash information"
-            },
-            "xpath": {
-              "type": "string",
-              "description": "XPath to extract hash information. Only for HTML and XML"
-            },
-            "script": {
-              "script_type": "object",
-              "description": "Custom script to extract hash information. Supports BASH, FISH, ZSH, PowerShell (pwsh), Nushell, and Python",
-              "properties": {
-                "type": {
-                  "type": "string",
-                  "description": "Script type",
-                  "enum": ["bash", "fish", "zsh", "powershell", "nushell", "python"],
-                  "default": "bash"
-                },
-                "run": {
-                  "type": "string",
-                  "description": "The script to run"
-                }
-              }
-            }
-          },
-          "required": ["url", "regex"]
+          "description": "Auto-update download URL for the architecture"
         }
-      },
-      "required": ["url", "check_hash"]
+      }
     }
   },
   "type": "object",
