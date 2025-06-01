@@ -8,7 +8,6 @@ description: 'Open Source Password Manager.'
 arch:
   x86_64:
     url: https://github.com/bitwarden/clients/releases/download/desktop-v2025.4.2/Bitwarden-2025.4.2-x86_64.rpm
-    hash: sha256:6be030cc6258c149bd22802f99fa925d257d161b5d47db6567726b352074d586
 auto_update:
   check_version:
     url: https://api.github.com/repos/bitwarden/clients/releases
@@ -17,6 +16,3 @@ auto_update:
   arch:
     x86_64:
       url: https://github.com/bitwarden/clients/releases/download/desktop-v$version/Bitwarden-$version-x86_64.rpm
-      check_hash:
-        url: $baseurl/sha256-checksums.txt
-        regex: $basename.*$sha256
