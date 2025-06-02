@@ -39,8 +39,7 @@
     "name",
     "license",
     "description",
-    "homepage",
-    "arch"
+    "homepage"
   ],
   "properties": {
     "supported_os": {
@@ -104,6 +103,22 @@
       "type": "string",
       "description": "Additional notes about the package"
     },
+    "pkg_arch": {
+      "type": "array",
+      "description": "List of supported CPU architectures",
+      "minItems": 1,
+      "maxItems": 100,
+      "items": {
+        "type": "string",
+        "examples": [
+          "x86_64",
+          "x86",
+          "arrch64",
+          "ppc64le",
+          "none"
+        ]
+      }
+    },
     "arch": {
       "type": "object",
       "description": "Architecture-specific download information",
@@ -128,7 +143,7 @@
             }
           }
         },
-        "arm64": {
+        "arrch64": {
           "type": "object",
           "description": "Architecture-specific download information",
           "properties": {
@@ -365,7 +380,7 @@
                 }
               }
             },
-            "arm64": {
+            "arrch64": {
               "type": "object",
               "description": "Auto-update architecture-specific download information",
               "properties": {
