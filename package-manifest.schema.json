@@ -30,26 +30,6 @@
         "Shareware",
         "Unlicense"
       ]
-    },
-    "pkg_arch": {
-      "type": "object",
-      "description": "Architecture-specific download information",
-      "properties": {
-        "url": {
-          "type": "string",
-          "description": "Download URL for the architecture"
-        }
-      }
-    },
-    "auto_update_pkg_arch": {
-      "type": "object",
-      "description": "Auto-update architecture-specific download information",
-      "properties": {
-        "url": {
-          "type": "string",
-          "description": "Auto-update download URL for the architecture"
-        }
-      }
     }
   },
   "type": "object",
@@ -129,13 +109,34 @@
       "description": "Architecture-specific download information",
       "properties": {
         "x86_64": {
-          "$ref": "#/$defs/pkg_arch"
+          "type": "object",
+          "description": "Architecture-specific download information",
+          "properties": {
+            "url": {
+              "type": "string",
+              "description": "Download URL for the architecture"
+            }
+          }
         },
         "x86": {
-          "$ref": "#/$defs/pkg_arch"
+          "type": "object",
+          "description": "Architecture-specific download information",
+          "properties": {
+            "url": {
+              "type": "string",
+              "description": "Download URL for the architecture"
+            }
+          }
         },
         "arm64": {
-          "$ref": "#/$defs/pkg_arch"
+          "type": "object",
+          "description": "Architecture-specific download information",
+          "properties": {
+            "url": {
+              "type": "string",
+              "description": "Download URL for the architecture"
+            }
+          }
         }
       }
     },
