@@ -9,7 +9,8 @@
     "name",
     "license",
     "description",
-    "homepage"
+    "homepage",
+    "pkg_arches"
   ],
   "properties": {
     "supported_os": {
