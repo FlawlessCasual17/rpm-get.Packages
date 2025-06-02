@@ -136,7 +136,7 @@
           "x86",
           "arrch64",
           "ppc64le",
-          "none"
+          "neutral"
         ]
       }
     },
@@ -165,6 +165,16 @@
           }
         },
         "arrch64": {
+          "type": "object",
+          "description": "Architecture-specific download information",
+          "properties": {
+            "url": {
+              "type": "string",
+              "description": "Download URL for the architecture"
+            }
+          }
+        },
+        "neutral": {
           "type": "object",
           "description": "Architecture-specific download information",
           "properties": {
